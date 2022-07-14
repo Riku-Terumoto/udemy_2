@@ -1,0 +1,18 @@
+//グローバルナビに良く出てくる60pxを共通化
+$GNaviHeight: 60px;
+//グローバルナビ横幅
+$GNaviBUttonWidth: 150px;
+$ContentsWidth: 1024px;
+$SideAreaWidth: 300px;
+$AreaPadding: 20px;
+
+
+$width: (
+    contents: 1024px,
+    sideArea: 300px
+);
+
+$path: (
+    //コロン二つで一つ上の階層に上がって、imgフォルダに入る
+    img: "../img/"
+);

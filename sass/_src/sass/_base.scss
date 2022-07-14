@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 15px;
+}
+
+p, li {
+    line-height: 2rem;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+li {
+    list-style: none;
+}
+
+//ネストは実際にhtmlの構造を忠実に書く必要はない
+//どちらかというと親子セレクタをネストで書き換える感覚
+
+
+.header {
+    height: 200px;
+    width: 100%;
+    //変数を文字列で出すインターポレーション
+    background: url("#{map-get($path, img)}header_001.jpg") no-repeat center top;
+    background-size: cover;
+    //継承元にincludeすると継承先にも適用される
+    .title {
+        width: map-get($width, contents);
+        margin: 0 auto;
+        text-align: center;
+        @include textShadow(#fff, 1);
+    }
+
+    .sub_title {
+        @extend .title;
+        font-size: 1.2rem;
+    }
+}
+
+.g_navi {
+    height: $GNaviHeight;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    ul {
+        width: $GNaviBUttonWidth * 4;
+        margin: 0 auto;
+        overflow: hidden;
+        li {
+            width: $GNaviBUttonWidth;
+            height: $GNaviHeight;
+            float: left;
+            text-align: center;
+            a {
+                display: block;
+                line-height: $GNaviHeight;
+                &:hover {
+                    background: rgba(#000, 0.1);
+                }
+            }
+        }
+    }
+}
+
+.contents {
+    width: map-get($width, contents);
+    margin: 0 auto;
+    overflow: hidden;
+
+    @include media("tb") {
+        width: 100%;
+    }
+    .main_area {
+        width: map-get($width, contents) - map-get($width, sideArea) - $AreaPadding * 2;
+        float: left;
+        padding: $AreaPadding;
+        @include media("tb") {
+            width: calc(100% - #{map-get($width, sideArea)} - #{map-get($padding, area)} * 2);
+        }
+
+        @include media("sp") {
+            width: calc(100% - $AreaPadding * 2);
+            float: none;
+        }
+    }
+    .side_area {
+        width: map-get($width, sideArea) - $AreaPadding * 2;
+        float: left;
+        padding: $AreaPadding;
+
+        @include media("sp") {
+            width: calc(100% - $AreaPadding * 2);
+            float: none;
+        }
+
+        //%で継承の元となるスタイルを作成する（htmlにはない継承親セレクタを作成）
+        %side_area_box {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .search_area {
+            @extend %side_area_box;
+            margin-bottom: 20px;
+        }
+
+        .category_area {
+            @extend %side_area_box;
+
+            li {
+                @include linkArrow;
+            }
+        }
+    }
+}
+
+.footer {
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+}

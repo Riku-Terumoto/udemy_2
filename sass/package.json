@@ -1,0 +1,29 @@
+{
+  "name": "sass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp",
+    "release": "gulp release"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.2.1",
+    "browser-sync": "^2.26.13",
+    "css-declaration-sorter": "^6.0.2",
+    "css-mqpacker": "^7.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sass-lint": "^1.4.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "postcss": "^8.2.4",
+    "postcss-sorting": "^6.0.0"
+  }
+}

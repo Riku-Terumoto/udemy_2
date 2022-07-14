@@ -1,0 +1,52 @@
+$breakpoint:(
+    sp:"only screen and (max-width: 767px)",
+    tb:"only screen and (max-width: 1024px)",
+);
+
+@mixin media ($divice) {
+    @media #{map-get($breakpoint, $divice)} {
+        @content;
+    }
+}
+
+
+//以下のやり方もある
+/* マップ $map:(key: value)  各幅の値を登録しておく */
+$breakpoints: (
+  'sm': 340,
+  'md': 768,
+  'lg': 1024,
+  'xl': 1230,
+  'xxl': 2000,
+) !default; /* $breakpointsがココより以前に設定されている場合は上書きしないという設定 */
+
+/* @mixin mixin名(引数) -> @include mixin名(***)　という形でどこでも使えるようになる */
+@mixin mq($mq, $bp1:lg, $bp2:lg) {        /* $引数名:初期値 */
+
+  /* 引数の幅の数値 */
+  $w1    : map-get($breakpoints, $bp1);  /* map-get() -> $breakpointsから値の数値を取得。例ではlgなので`1024`が`$w1`に入る */
+  $w2    : map-get($breakpoints, $bp2);
+
+  /* 出力する文字列の設定 */
+  $min1  : 'min-width: #{ ($w1+1) }px';  /* #{ } -> 処理の途中で変数を使う場合 */
+  $max1  : 'max-width: #{ ($w1)   }px';
+  $min2  : 'min-width: #{ ($w1+1) }px';
+  $max2  : 'max-width: #{ ($w2)   }px';
+
+  /* 内容によって書き出す内容を条件分岐する */
+  @if $mq == min {  /* もし第一引数が`min`だったら */
+    @media screen and ($min1) {
+      @content;  /* @includeしたとき、他のブロックと同様に中括弧を使用して渡されます */
+    }
+  }
+  @else if $mq == max {  /* もし第一引数が`max`だったら */
+    @media screen and ($max1) {
+      @content;
+    }
+  }
+  @else if $mq == min-max {  /* もし第一引数が`min-max`だったら */
+    @media screen and ($min2) and ($max2) {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+//インポートファイル
+//変数定義ファイルは他スタイルファイルより前に定義しておかないとエラーになる
+//mixinは変数同様使うスタイルより前に定義する
+@import "variables";
+@import "mixins";
+@import "media";
+@import "base";
+//topページ専用のscssなので、固定でid topの中にインポートしちゃう
+#top {
+    @import "top";
+}
+@import "util";
+
+
